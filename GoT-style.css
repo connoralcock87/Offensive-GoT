@@ -1,0 +1,52 @@
+.navbar-brand {
+  padding: 0px;
+  height: 80px;
+}
+
+.nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+
+body {
+  padding-top: 50px;
+  background-color: #d7be9f;
+  font-family: 'Spectral', serif;
+  width: 100vw;
+}
+
+.lameJokes {
+  padding: 100px 15px;
+  text-align: center;
+}
+
+.lead {
+  padding: 10px;
+}
+
+.theText {
+  font-size: 24px;
+  font-family: 'Cinzel Decorative', cursive;
+  padding: 30px;
+}
+
+.embed-responsive-item {
+  width: 50%;
+}
+
+.offensive {
+  padding: 10px;
+  font-family: 'Cinzel Decorative', cursive;
+}
