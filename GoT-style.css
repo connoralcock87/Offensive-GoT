@@ -24,7 +24,6 @@ body {
   padding-top: 50px;
   background-color: #d7be9f;
   font-family: 'Spectral', serif;
-  width: 100vw;
 }
 
 .lameJokes {
@@ -49,4 +48,3 @@ body {
 .offensive {
   padding: 10px;
   font-family: 'Cinzel Decorative', cursive;
-}

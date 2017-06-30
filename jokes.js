@@ -1,13 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
   $(".offensive").click(function() {
 
-  var url = ('https://cors-anywhere.herokuapp.com/https://anapioficeandfire.com/api/characters/' + Math.floor(Math.random() * 2138));
-    //2138 characters
-
-  var $joke = $('p.joke');
-
-  var verb1 = [
+    var verb1 = [
       'impaled',
       'shanked',
       'stabbed',
@@ -24,9 +19,7 @@ $(document).ready(function () {
       'beat',
       'struck',
       'tortured',
-      'crucified'];
-
-    var verb2 = [
+      'crucified',
       'flogged',
       'lambasted',
       'pelted',
@@ -37,6 +30,22 @@ $(document).ready(function () {
       'harassed',
       'molested',
       'fondled'];
+
+    var thinks1 = [
+      'thinks',
+      'says',
+      'believes',
+      'tells you',
+      'declares',
+      'suggests',
+      'maintains'];
+
+    var relative1 = [
+      'mother',
+      'cousin',
+      'sister',
+      'brother',
+      'father'];
 
     var adverb1 = [
       'accidentally',
@@ -57,9 +66,7 @@ $(document).ready(function () {
       'daintily',
       'softly',
       'vivaciously',
-      'repeatedly'];
-
-    var adverb2 = [
+      'repeatedly',
       'defiantly',
       'deliberately',
       'elegantly',
@@ -78,14 +85,12 @@ $(document).ready(function () {
       'happily',
       'hastily',
       'silently',
-      'hungrily'];
-
-    var adverb3 = [
+      'hungrily',
       'innocently',
       'inquisitively',
       'irritably',
       'joyously',
-      'judgementally',
+      'judgmentally',
       'kindly',
       'lazily',
       'loudly',
@@ -104,7 +109,7 @@ $(document).ready(function () {
     var noun1 = [
       'hardboiled egg',
       'hypodermic needle',
-      'chainsaw',
+      'popsicle',
       'weinerschnitzel',
       'Hot Pocket',
       'deer antler',
@@ -120,9 +125,7 @@ $(document).ready(function () {
       'coffee table book about coffee tables',
       'Nickelback poster autographed by Chad Kroeger',
       'stick of butter',
-      'septum piercing'];
-
-    var noun2 = [
+      'septum piercing',
       'bunny slipper',
       'king size air mattress',
       'breast implant',
@@ -141,9 +144,7 @@ $(document).ready(function () {
       'funnel cake',
       'piece of cornbread',
       'thingamabob',
-      'Gucci Mane mixtape'];
-
-    var noun3 = [
+      'Gucci Mane mixtape',
       'bottle of Courvoisier VSOP',
       'Lionel Richie album on vinyl',
       'packet of grape Kool-Aid mix',
@@ -161,29 +162,52 @@ $(document).ready(function () {
       'giant squid tentacle',
       'Bop-It',
       'Ryan Leaf jersey',
-      'wombat'];
-
-    var noun4 = [
+      'wombat',
       'doohickey',
       'KitchenAid mixer',
       'ball of yarn',
       'pocketwatch',
       'butternut squash'];
 
-  var verb = verb1[Math.floor(Math.random() * 17)];
-  var adverb = adverb1[Math.floor(Math.random() * 19)];
-  var noun = noun1[Math.floor(Math.random() * 19)];
+    var verb = verb1[Math.floor(Math.random() * 27)];
+    var adverb = adverb1[Math.floor(Math.random() * 57)];
+    var noun = noun1[Math.floor(Math.random() * 61)];
+    var thinks = thinks1[Math.floor(Math.random() * 7)];
+    var relative = relative1[Math.floor(Math.random() * 5)];
 
-    $.get(url)
-      .then(function(data) {
-        var theName = data.name;
+    var charUrl = ('https://cors-anywhere.herokuapp.com/https://anapioficeandfire.com/api/characters/' + Math.floor(Math.random() * 2138));
+    //2138 characters
+    var houseUrl = ('https://cors-anywhere.herokuapp.com/http://www.anapioficeandfire.com/api/houses/' + Math.floor(Math.random() * 444));
+    //444 houses
+    var $joke = $('p.joke');
+
+    var requests = [
+      $.get(charUrl),
+      $.get(houseUrl)
+    ];
+    Promise.all(requests)
+      .then(function(responses) {
+        var theName = responses[0].name;
         if (theName.length > 1) {
-          theName = data.name;
+          theName = responses[0].name;
         } else {
-          theName = data.aliases;
+          theName = responses[0].aliases;
         }
-        $joke.text(theName + " " + verb + " you " + adverb + " with a " + noun);
+        var thePlace = responses[1].region;
+        if (thePlace.length > 1) {
+          thePlace = responses[1].region;
+        } else {
+          thePlace = responses[1].name;
+        }
+        // pick a sentence gen
+        // call gen
+        var violent = theName + " " + verb + " you " + adverb + " with a " + noun;
+        var momJoke = theName + " " + thinks + " that your " + relative + " resembles a " + noun + " from " + thePlace;
+        var goAway = theName + " tells you that you're not welcome in " + thePlace;
+        var sentence1 = [violent, violent, violent, momJoke, momJoke, goAway];
+        var sentence = sentence1[Math.floor(Math.random() * 6)];
+        //randomize sentence
+        $joke.text(sentence);
       });
   });
 });
-// format = Character + verb + 'you' + adverb + 'with a' + adjective + noun
