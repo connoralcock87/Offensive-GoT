@@ -176,9 +176,7 @@ $(document).ready(function() {
     var relative = relative1[Math.floor(Math.random() * 5)];
 
     var charUrl = ('https://cors-anywhere.herokuapp.com/https://anapioficeandfire.com/api/characters/' + Math.floor(Math.random() * 2138));
-    //2138 characters
     var houseUrl = ('https://cors-anywhere.herokuapp.com/http://www.anapioficeandfire.com/api/houses/' + Math.floor(Math.random() * 444));
-    //444 houses
     var $joke = $('p.joke');
 
     var requests = [
@@ -199,14 +197,13 @@ $(document).ready(function() {
         } else {
           thePlace = responses[1].name;
         }
-        // pick a sentence gen
-        // call gen
+
         var violent = theName + " " + verb + " you " + adverb + " with a " + noun;
         var momJoke = theName + " " + thinks + " that your " + relative + " resembles a " + noun + " from " + thePlace;
-        var goAway = theName + " tells you that you're not welcome in " + thePlace;
+        var goAway = theName + " tells you that you're being deported to " + thePlace;
         var sentence1 = [violent, violent, violent, momJoke, momJoke, goAway];
         var sentence = sentence1[Math.floor(Math.random() * 6)];
-        //randomize sentence
+
         $joke.text(sentence);
       });
   });
